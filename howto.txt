@@ -1,0 +1,14 @@
+DIGITAL OCEAN
+
+Droplet server setup:
+sudo sh -c "echo deb https://get.docker.com/ubuntu docker main /etc/apt/sources.list.d/docker.list"
+cat ~/.ssh/id_rsa.pub | ssh root@104.131.34.218 "cat >> ~/.ssh/authorized_keys"
+
+
+DOCKER
+
+
+
+GITHUB
+
+Create/fork project on github
