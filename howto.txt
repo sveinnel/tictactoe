@@ -1,14 +1,36 @@
 DIGITAL OCEAN
 
 Droplet server setup:
-sudo sh -c "echo deb https://get.docker.com/ubuntu docker main /etc/apt/sources.list.d/docker.list"
-cat ~/.ssh/id_rsa.pub | ssh root@104.131.34.218 "cat >> ~/.ssh/authorized_keys"
 
+Create account
+Create or use existing SSH key (no passphrase)
+Create droplet (512mb, Ubuntu 14.04)
+Log into droplet via ssh
+Follow instructions http://docs.docker.com/installation/ubuntulinux/
+When installing docker, use curl -ssL option
+
+To establish ssh link:
+cat ~/.ssh/id_rsa.pub | ssh root@104.131.34.218 "cat >> ~/.ssh/authorized_keys"
 
 DOCKER
 
+MacOsX/Windows - install boot2docker
+Remember - docker only works in boot2docker console unless you add DOCKER… environment variables.
+Create account on docker.com
 
 
 GITHUB
 
-Create/fork project on github
+fork project on github
+ensure you have latest node/npm
+edit dockerbuild.sh
+line “docker build -t gulli/tictactoe ./dist/“
+change gulli to your docker hub username
+make sure docker is running (boot2docker)
+run "./dockerbuild" in bash
+run "docker push <yourname>/tictactoe"
+
+On DO droplet server (production)
+docker run <yourname>/tictactoe
+
+WHOLA, we have manual deployment to production environment.
