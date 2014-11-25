@@ -6,10 +6,13 @@ Create account
 Create or use existing SSH key (no passphrase)
 Create droplet (512mb, Ubuntu 14.04)
 Log into droplet via ssh
-Follow instructions http://docs.docker.com/installation/ubuntulinux/
+Follow instructions
+  http://docs.docker.com/installation/ubuntulinux/
 When installing docker, use curl -ssL option
 
-To establish ssh link:
+
+To establish ssh link (selecting SSH key did not work for me):
+
 cat ~/.ssh/id_rsa.pub | ssh root@104.131.34.218 "cat >> ~/.ssh/authorized_keys"
 
 DOCKER
@@ -31,6 +34,7 @@ run "./dockerbuild" in bash
 run "docker push <yourname>/tictactoe"
 
 On DO droplet server (production)
-docker run <yourname>/tictactoe
+docker run -p 80:8080 -d -e "NODE_ENV=production" <yourname>/tictactoe
+
 
 WHOLA, we have manual deployment to production environment.
