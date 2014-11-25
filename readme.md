@@ -1,14 +1,20 @@
 Project Template for TicTacToe
 =========
 
+Getting started with this project template. After this you should have the project up-and-running on a Digital Ocean
+
 ### DIGITAL OCEAN
 
 Droplet server setup:
 
-* Create account
+* Create account on [DigitalOcean](http://digitalocean.com)
 * Create or use existing SSH key (no passphrase)
 * Create droplet (512mb, Ubuntu 14.04)
 * Log into droplet via ssh
+``` 
+ssh root@<ipaddress>
+``` 
+
 * Follow instructions
   [Ubuntu Linux Setup](http://docs.docker.com/installation/ubuntulinux/)
 
@@ -17,7 +23,7 @@ When installing docker, use curl -ssL option
 To establish ssh link (selecting SSH key did not work for me):
 
 ``` 
-cat ~/.ssh/id_rsa.pub | ssh root@104.131.34.218 "cat >> ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh root@<ipaddress> "cat >> ~/.ssh/authorized_keys"
 ``` 
 
 
@@ -36,7 +42,7 @@ Docker setup and installation
 * ensure you have latest node/npm
 * edit dockerbuild.sh
   * line “docker build -t gulli/tictactoe ./dist/“
-  * change gulli to your docker hub username
+  * change gulli to <yourname>
 * make sure docker is running (boot2docker)
 * run "./dockerbuild" in bash
 * run 
@@ -45,7 +51,71 @@ docker push <yourname>/tictactoe"
 ``` 
 
 On Digital Ocean server (production)
+
+``` 
 docker run -p 80:8080 -d -e "NODE_ENV=production" <yourname>/tictactoe
+``` 
 
-Navigate to http://<yourServerIpAddress>  and you should have yeoman landing page.
+Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
 
+
+### Project backlog
+
+*	Can update latest version in production by push of a button
+  
+  Including changes to data structure
+
+*	Can play tic-tac-toe against another user
+
+ Implement using TDD
+ Acceptance TDD
+ Controller TDD
+ DOM - TicTacToe directive with TDD
+ Server side, API TDD
+
+*	Can play-back any given game to see how it was played
+
+ Use event sourcing - record every user interaction
+
+*	Can get an email when I win a match
+
+ Implement an acceptance test, using test double to simulate email sending
+
+*	Can downgrade to selected version by push of a button
+
+ Implement rollback, including down migrations
+
+*	Can playback old games after data structure has changed
+
+ Database migration
+
+*	Can see how many users played Tic-Tac-Toe in a given period
+
+ Metrics and monitoring
+
+*	Can know how many users our application supports on given hardware
+
+ Automated capacity testing
+
+*	Can be sure that latest version in production supports happy path after upgrade
+
+ Acceptance test through UI
+ Acceptance test through API
+
+*	Can update to latest version with zero downtime
+
+  Blue/Green deployment and testing
+
+*	Can be sure that deployment is not continued if key resources are missing
+
+  Env smoke tests
+  Auto rollback
+
+*	Can be sure that deployment is not continued if configuration parameter is not set
+
+  Env smoke tests
+  Auto rollback
+
+*	Can continue playing even if the whole world is playing back games
+
+  CQRS - separate deployment for playback
