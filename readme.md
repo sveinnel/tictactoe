@@ -44,7 +44,10 @@ Docker setup and installation
   * line “docker build -t gulli/tictactoe ./dist/“
   * change gulli to <yourname>
 * make sure docker is running (boot2docker)
-* run "./dockerbuild" in bash
+* run 
+``` 
+./dockerbuild
+``` 
 * run 
 ``` 
 docker push <yourname>/tictactoe"
@@ -63,7 +66,11 @@ Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
 
 *	Can update latest version in production by push of a button
   
-  Including changes to data structure
+  Including changes to data structure.
+
+* Can get feedback on failing tests and diagnostics
+
+  Commit stage / continuous integration.
 
 *	Can play tic-tac-toe against another user
 
