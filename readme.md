@@ -126,3 +126,9 @@ Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
 *	Can continue playing even if the whole world is playing back games
 
   CQRS - separate deployment for playback
+  
+  
+=== More stories for consideratino
+  
+* Can provision a new environment in cloud (Digital Ocean) with minimal input.
+  Script server provisioning.
