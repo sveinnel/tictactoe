@@ -1,13 +1,14 @@
 Project Template for TicTacToe
 =========
 
-Getting started with this project template. After this you should have the project up-and-running on a Digital Ocean
+Getting started with this project template. After this you should have the project up-and-running on a Digital Ocean droplet server.
 
 ### DIGITAL OCEAN
 
 Droplet server setup:
 
 * Create account on [DigitalOcean](http://digitalocean.com)
+  -- Use referral...
 * Create or use existing SSH key (no passphrase)
 * Create droplet (512mb, Ubuntu 14.04)
 * Log into droplet via ssh
@@ -17,6 +18,7 @@ ssh root@<ipaddress>
 
 * Follow instructions
   [Ubuntu Linux Setup](http://docs.docker.com/installation/ubuntulinux/)
+  or run [script](https://github.com/stefaneg/tictactoe/blob/master/provisioning/production/server-init.sh) (untested).
 
 When installing docker, use curl -ssL option
 
@@ -128,7 +130,7 @@ Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
   CQRS - separate deployment for playback
   
   
-=== More stories for consideratino
+=== More stories for consideration
   
 * Can provision a new environment in cloud (Digital Ocean) with minimal input.
-  Script server provisioning.
+  Script server provisioning. [Droplet API](https://developers.digitalocean.com/#droplets)
