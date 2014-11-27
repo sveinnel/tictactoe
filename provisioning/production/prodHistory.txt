@@ -1,0 +1,105 @@
+    1  pwd
+    2  apt-get update
+    3  apt-get install docker.io
+    4  source /etc/bash_completion.d/docker.io
+    5  ls /usr/lib/apt/methods/https
+    6  ls /usr/lib/apt/methods/https -la
+    7  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+    8  sudo sh -c "echo deb https://get.docker.com/ubuntu docker main\
+    9  sh -c "echo deb https://get.docker.com/ubuntu docker main /etc/apt/sources.list.d/docker.list"
+   10  pwd
+   11  apt-get update
+   12  apt-get install lxc-docker
+   13  curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+   14  ls .ssh/authorized_keys
+   15  cat .ssh/authorized_keys
+   16  sudo docker run -i -t ubuntu /bin/bash
+   17  docker ps
+   18  sudo docker run -t ubuntu /bin/bash
+   19  docker ps
+   20  ps
+   21  top
+   22  docker ps
+   23  docker kill de89331e0400
+   24  docker ps
+   25  docker --help
+   26  docker info
+   27  docker port
+   28  ps -alf
+   29  ps -A
+   30  ps -Alf
+   31  ps -Alf | grep docker
+   32  docker -d -H fd://
+   33  docker stop
+   34  service docker stop
+   35  docker -d -H fd://
+   36  docker ps
+   37  service docker start
+   38  docker ps
+   39  service docker stop
+   40  ufw allow 2375/tcp
+   41  vi /etc/default/ufw
+   42  ufw reload
+   43  service docker start
+   44  docker run -p 5000:5000 -e STORAGE_PATH=/registry registry
+   45  ls -lart
+   46  pwd
+   47  cd
+   48  cd .
+   49  ls -lart
+   50  mkdir registry
+   51  docker ps
+   52  docker run -p 5000:5000 -e registry
+   53  docker run -p 5000:5000 registry
+   54  docker ps
+   55  docker run -p 5000:5000 -v /registry /registry registry
+   56  pwd
+   57  cd ..
+   58  ls -lart
+   59  mkdir registry
+   60  chmod rwrwrw registry
+   61  chmod 777 registry
+   62  docker run -p 5000:5000 -v /registry /registry registry
+   63  docker run -p 5000:5000 -v /registry registry registry
+   64  docker run -p 5000:5000 -v /registry:/registry registry
+   65  docker run -p 5000:5000 -v /registry:/registry -e STORAGE_PATH=/registry registry
+   66  docker run -p -d 5000:5000 -v /registry:/registry -e STORAGE_PATH=/registry registry
+   67  docker run -d -p 5000:5000 -v /registry:/registry -e STORAGE_PATH=/registry registry
+   68  ls -lar /registry
+   69  ls -lart
+   70  cd registry/
+   71  ls -lart
+   72  ls- lart
+   73  ls -lart
+   74  pwd
+   75  ls -lart
+   76  docker ps
+   77  docker attach furious_davinci bash
+   78  docker exec -it b59698a1cc23 bash
+   79  docker ps
+   80  docker kill b59698a1cc23
+   81  docker rmi b59698a1cc23
+   82  docker rm b59698a1cc23
+   83  docker images
+   84  docker rm registry
+   85  docker rm 7e2db37c6564
+   86  docker rmi 7e2db37c6564
+   87  docker ls
+   88  docker ps
+   89  docker rmi 7e2db37c6564
+   90  docker rm b74b84005d51
+   91  docker rmi 7e2db37c6564
+   92  docker rmi  7e2db37c6564ffffff
+   93  docker rmi -f 7e2db37c6564
+   94  docker ps
+   95  docker ps --help
+   96  docker ps -a
+   97  docker images
+   98  docker run --name registry -d -p 5000:5000 -v /docker_images:/docker-registry-storage lukaspustina/registry-demo
+   99  cd ..
+  100  docker ps
+  101  docker run gulli/tictactoe
+  102  docker run -p 80:8080 -d -e "NODE_ENV=production" gulli/tictactoe
+  103  history
+  104  pwd
+  105  history > prodHistory.txt
