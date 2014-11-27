@@ -33,7 +33,7 @@ cat ~/.ssh/id_rsa.pub | ssh root@<ipaddress> "cat >> ~/.ssh/authorized_keys"
 
 Docker setup and installation
 
-* MacOsX/Windows - install boot2docker. Follow online instructions.
+* MacOsX/Windows - install boot2docker. Follow [online instructions](https://docs.docker.com/installation/#installation).
 * Remember - docker only works in boot2docker console unless you add DOCKER… environment variables.
 * Create account on docker.com, <yourname> refers to docker username
 
