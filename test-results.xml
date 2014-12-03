@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-02T22:35:43" id="0" hostname="Snulla" tests="1" errors="0" failures="0" time="0.061">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-03T19:01:44" id="0" hostname="Snulla" tests="1" errors="0" failures="0" time="0.056">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
-    <testcase name="should attach a list of things to the scope" time="0.061" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
+    <testcase name="should attach a list of things to the scope" time="0.056" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>

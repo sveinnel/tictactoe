@@ -4,21 +4,26 @@ cd /home/sveinn/hgop/tictactoe/tictactoe/
 
 echo Cleaning...
 rm -rf ./dist
-if [ $? -ne 0 ] ; then exit $? ; fi
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
 echo Building app
 grunt
-if [ $? -ne 0 ] ; then exit $? ; fi
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
 cp ./Dockerfile ./dist/
-if [ $? -ne 0 ] ; then exit $? ; fi
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
 cd dist
 npm install --production
-if [ $? -ne 0 ] ; then exit $? ; fi
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
 echo Building docker image
 docker build -t sveinnel/tictactoe .
-if [ $? -ne 0 ] ; then exit $? ; fi
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
 echo "Done"
