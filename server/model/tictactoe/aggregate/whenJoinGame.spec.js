@@ -3,8 +3,8 @@ var _ = require('lodash');
 
 var tictactoe = require('./tictactoe')
 
-describe('create game command', function() {
-  it('should emit game created event', function(){
+describe('JoinGame command', function() {
+  it('should emit GameJoined event', function(){
 
     var given = [
       {
