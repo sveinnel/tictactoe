@@ -27,6 +27,14 @@ describe('JoinGame command', function() {
     };
     var then = [
       {
+        event: "GameCreated",
+        user: {
+          userName: "TestUser1"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15"
+      },
+      {
         event: "GameJoined",
         user: {
           userName: "TestUser2"
@@ -37,7 +45,7 @@ describe('JoinGame command', function() {
     ];
 
     var actualEvents = tictactoe(given).executeCommand(when);
-    should(actualEvents.length).be.exactly(1);
+    should(actualEvents.length).be.exactly(2);
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
   })
 });
