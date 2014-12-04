@@ -6,21 +6,30 @@ var tictactoe = require('./tictactoe')
 describe('create game command', function() {
   it('should emit game created event', function(){
 
-    var given = [];
+    var given = [
+      {
+        event: "GameCreated",
+        user: {
+          userName: "TestUser"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15"
+      }
+    ];
     var when =
     {
-      cmd: "CreateGame",
+      cmd: "JoinGame",
       user: {
-        userName: "TestUser1"
+        userName: "TestUser2"
       },
       name: "TestGame1",
       timeStamp: "2014-12-04T15:15:15"
     };
     var then = [
       {
-        event: "GameCreated",
+        event: "GameJoined",
         user: {
-          userName: "TestUser1"
+          userName: "TestUser2"
         },
         name: "TestGame1",
         timeStamp: "2014-12-04T15:15:15"

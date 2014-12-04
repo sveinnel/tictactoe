@@ -1,5 +1,6 @@
 module.exports = function(history){
-	var gameState
+	var gameState = history;
+	
 	return {
 		executeCommand: function(cmd){
 			var commandHandlers = {
