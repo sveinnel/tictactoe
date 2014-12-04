@@ -10,7 +10,7 @@ describe('JoinGame command', function() {
       {
         event: "GameCreated",
         user: {
-          userName: "TestUser"
+          userName: "TestUser1"
         },
         name: "TestGame1",
         timeStamp: "2014-12-04T15:15:15"
