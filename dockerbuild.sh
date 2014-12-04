@@ -6,6 +6,14 @@ rm -rf ./dist
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
+echo Installing dependensies
+npm install
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
+bower install
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
+
 echo Building app
 grunt
 EXITCODE=$?
