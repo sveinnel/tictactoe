@@ -3,7 +3,7 @@ var _ = require('lodash');
 
 var tictactoe = require('./tictactoe')
 
-describe('Player one PlaceMove command', function() {
+describe('Player one first PlaceMove command', function() {
   it('should emit PlaceMove event', function(){
 
     var given = [
@@ -73,5 +73,58 @@ describe('Player one PlaceMove command', function() {
     var actualEvents = tictactoe(given).executeCommand(when);
     should(actualEvents.length).be.exactly(3);
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
-  })
+  });
+});
+
+describe('Player two PlaceMove command', function() {
+  it('should emit PlaceMove event', function(){
+
+    var given = [
+      {
+        event: "MovePlaced",
+        user: {
+          userName: "TestUser1"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15",
+        move: {
+          coordinates: [0,0],
+          side: 'X'
+        }
+      }
+    ];
+    
+    var when =
+      {
+        cmd: "PlaceMove",
+        user: {
+          userName: "TestUser2"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15",
+        move: {
+          coordinates: [0,1],
+          side: 'O'
+        }
+      };
+    
+    var then = [
+      {
+        event: "MovePlaced",
+        user: {
+          userName: "TestUser2"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15",
+        move: {
+          coordinates: [0,1],
+          side: 'X'
+        }
+      }
+    ];
+
+    var actualEvents = tictactoe(given).executeCommand(when);
+    should(actualEvents.length).be.exactly(3);
+    should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+  });
 });
