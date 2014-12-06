@@ -7,8 +7,7 @@ describe('CreateGame command', function() {
   it('should emit GameCreated event', function(){
 
     var given = [];
-    var when =
-    {
+    var when = {
       cmd: "CreateGame",
       user: {
         userName: "TestUser1"

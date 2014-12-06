@@ -1,5 +1,7 @@
 module.exports = function(history){
-	var gameState = history;
+	var tictactoeState = require('./tictactoeState');
+	var gameState = tictactoeState(history);
+	gameState.processEvents(history);
 
 	return {
 		executeCommand: function(cmd){
@@ -13,14 +15,26 @@ module.exports = function(history){
 					};
 				},
 				"JoinGame": function(cmd){
-					return {
-					    event: "GameJoined",
-					    user: cmd.user,
-					    name: cmd.name,
-					    timeStamp: cmd.timeStamp
-					};
+					if(!gameState.gameFull()){
+						return {
+						    event: "GameJoined",
+						    user: cmd.user,
+						    name: cmd.name,
+						    timeStamp: cmd.timeStamp
+						};
+					}
+					else
+					{
+						return {
+						    event: "FullGameJoinAttempted",
+						    user: cmd.user,
+						    name: cmd.name,
+						    timeStamp: cmd.timeStamp
+						};
+					}
 				},
 				"PlaceMove": function(cmd){
+					
 					return {
 						event: "MovePlaced",
 				        user: cmd.user,
