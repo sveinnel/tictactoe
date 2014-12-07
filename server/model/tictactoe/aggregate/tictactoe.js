@@ -32,7 +32,7 @@ module.exports = function(history) {
                     }
                 },
                 "PlaceMove": function(cmd) {
-                    var events  = []
+                    var events = []
                     if (gameState.okToMove(cmd)) {
                         events.push({
                             event: "MovePlaced",
@@ -50,10 +50,20 @@ module.exports = function(history) {
                             move: cmd.move
                         });
                     }
+                    history = history.concat(events);
+                    gameState.processEvents(history);
+                    if (gameState.gameWon()) {
+                        events.push({
+                            event: "GameWon",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp
+                        });
+                    }
                     return events;
                 }
             };
             return commandHandlers[cmd.cmd](cmd);
         }
-    }
+    };
 }

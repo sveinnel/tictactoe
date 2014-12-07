@@ -1,37 +1,76 @@
 var _ = require('lodash');
 
-module.exports = function(history){
-  var gridSize = 3;
-  var gameFull = false;
-  var gameGrid = [['','',''],['','',''],['','','']];
-  var gameScore = [0,0,0,0,0,0,0,0,0];
-  var moveCount = 0;
-  var lastMove = ""
+module.exports = function(history) {
+    var gridSize = 3;
+    var gameFull = false;
+    var gameGrid = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
+    var gameScore = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var moveCount = 0;
+    var lastMove = "";
+    var won = false;
 
-  function processEvent(event) {
-    if (event.event === "GameJoined") {
-      gameFull = true;
-    }
-    
-	if (event.event === "MovePlaced") {  	
-	  	moveCount ++;
-	  	lastMove = event.move.side;
-	  	gameGrid[event.move.coordinates[0]][event.move.coordinates[1]] = event.move.side;
-    }
-  }
-   
-  function processEvents(history){
-  	_.each(history,processEvent);
-  }
+    function checkIfWon(){
+    	for (var i = 0; i < 3; i++) {
+    		if(gameGrid[i][0] === gameGrid[i][1] && gameGrid[i][0] === gameGrid[i][2]){
+    			if(gameGrid[i][0] !== ''){
+    				won = true;
+    				break;
+    			}
+    		}
+    		if(gameGrid[0][i] === gameGrid[1][i] && gameGrid[0][i] === gameGrid[2][i]){
+    			if(gameGrid[0][i] !== ''){
+    				won = true;
+    				break;
+    			}
+    		}
+    	}
+    	
+    	if(gameGrid[0][0] === gameGrid[1][1] && gameGrid[0][0] === gameGrid[2][2]){
+    		if(gameGrid[0][0] !== ''){
+				won = true;
+			}
+    	}
 
-  return {
-    processEvents : processEvents,
-    gameFull : function(){
-    	return gameFull;
-    },
-    okToMove: function(cmd){
-    	return  cmd.move.side !== lastMove &&
-    			gameGrid[cmd.move.coordinates[0]][cmd.move.coordinates[1]] === '';
+    	if(gameGrid[0][2] === gameGrid[1][1] && gameGrid[0][2] === gameGrid[2][0]){
+    		if(gameGrid[0][2] !== ''){
+				won = true;
+			}
+    	}
+
     }
-  };
+
+    function processEvent(event) {
+        if (event.event === "GameJoined") {
+            gameFull = true;
+        }
+
+        if (event.event === "MovePlaced") {
+            moveCount++;
+            lastMove = event.move.side;
+            gameGrid[event.move.coordinates[0]][event.move.coordinates[1]] = event.move.side;
+            checkIfWon();
+        }
+    }
+
+    function processEvents(history) {
+        _.each(history, processEvent);
+    }
+
+    return {
+        processEvents: processEvents,
+        gameFull: function() {
+            return gameFull;
+        },
+        okToMove: function(cmd) {
+            return cmd.move.side !== lastMove &&
+                gameGrid[cmd.move.coordinates[0]][cmd.move.coordinates[1]] === '';
+        },
+        gameWon: function() {
+            return won;
+        }
+    };
 };

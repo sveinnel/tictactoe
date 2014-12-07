@@ -268,7 +268,7 @@ describe('Player one won', function() {
                 userName: "TestUser1"
             },
             name: "TestGame1",
-            timeStamp: "2014-12-04T15:15:15",
+            timeStamp: "2014-12-04T15:15:16",
             move: {
                 coordinates: [0, 2],
                 side: 'X'
@@ -281,7 +281,7 @@ describe('Player one won', function() {
                 userName: "TestUser1"
             },
             name: "TestGame1",
-            timeStamp: "2014-12-04T15:15:15",
+            timeStamp: "2014-12-04T15:15:16",
             move: {
                 coordinates: [0, 2],
                 side: 'X'
@@ -292,7 +292,7 @@ describe('Player one won', function() {
                 userName: "TestUser1"
             },
             name: "TestGame1",
-            timeStamp: "2014-12-04T15:15:15"
+            timeStamp: "2014-12-04T15:15:16"
         }];
 
         var actualEvents = tictactoe(given).executeCommand(when);
