@@ -1,8 +1,8 @@
 module.exports = function(history) {
     var tictactoeState = require('./tictactoeState');
-    var gameState = tictactoeState(history);
+    var gameState = tictactoeState(history);   
     gameState.processEvents(history);
-
+    
     return {
         executeCommand: function(cmd) {
             var commandHandlers = {
@@ -50,7 +50,7 @@ module.exports = function(history) {
                             move: cmd.move
                         });
                     }
-                    //history = history.concat(events);
+
                     gameState.processEvents(events);
                     if (gameState.gameWon()) {
                         events.push({
