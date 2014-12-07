@@ -215,7 +215,7 @@ describe('Player one won', function() {
         }];
 
         var when = {
-            event: "PlaceMove",
+            cmd: "PlaceMove",
             user: {
                 userName: "TestUser1"
             },
@@ -225,7 +225,7 @@ describe('Player one won', function() {
                 coordinates: [0, 2],
                 side: 'X'
             }
-        }
+        };
 
         var then = [{
             event: "MovePlaced",
@@ -247,8 +247,9 @@ describe('Player one won', function() {
             timeStamp: "2014-12-04T15:15:15"
         }];
 
-      //  var actualEvents = tictactoe(given).executeCommand(when);
-      //  should(actualEvents.length).be.exactly(2);
-      //  should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+        var actualEvents = tictactoe(given).executeCommand(when);
+        console.log('actualEvents', actualEvents);
+        should(actualEvents.length).be.exactly(2);
+        should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
     });
 });
