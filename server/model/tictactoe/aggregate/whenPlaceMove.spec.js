@@ -236,7 +236,7 @@ describe('Player one won', function() {
             timeStamp: "2014-12-04T15:15:15",
             move: {
                 coordinates: [1, 0],
-                side: '0'
+                side: 'O'
             }
         }, {
             event: "MovePlaced",
@@ -258,7 +258,7 @@ describe('Player one won', function() {
             timeStamp: "2014-12-04T15:15:15",
             move: {
                 coordinates: [1, 1],
-                side: '0'
+                side: 'O'
             }
         }];
 
@@ -293,6 +293,151 @@ describe('Player one won', function() {
             },
             name: "TestGame1",
             timeStamp: "2014-12-04T15:15:16"
+        }];
+
+        var actualEvents = tictactoe(given).executeCommand(when);
+        should(actualEvents.length).be.exactly(2);
+        should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+    });
+});
+describe('Draw', function() {
+    it('should emit GamDraw', function() {
+
+        var given = [{
+            event: "GameCreated",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15"
+        }, {
+            event: "GameJoined",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15"
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 0],
+                side: 'X'
+            }
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [1, 0],
+                side: 'O'
+            }
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 1],
+                side: 'X'
+            }
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [1, 1],
+                side: 'O'
+            }
+        },{
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [1, 2],
+                side: 'X'
+            }
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 2],
+                side: 'O'
+            }
+          }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [2, 0],
+                side: 'X'
+            }
+        }, {
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [2, 1],
+                side: 'O'
+            }
+        }];
+
+        var when = {
+            cmd: "PlaceMove",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [2, 2],
+                side: 'X'
+            }
+        };
+
+        var then = [{
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [2, 2],
+                side: 'X'
+            }
+        }, {
+            event: "GameDraw",
+            user: {
+                userName: "TestUser2"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15"
         }];
 
         var actualEvents = tictactoe(given).executeCommand(when);
