@@ -32,23 +32,25 @@ module.exports = function(history) {
                     }
                 },
                 "PlaceMove": function(cmd) {
+                    var events  = []
                     if (gameState.okToMove(cmd)) {
-                        return [{
+                        events.push({
                             event: "MovePlaced",
                             user: cmd.user,
                             name: cmd.name,
                             timeStamp: cmd.timeStamp,
                             move: cmd.move
-                        }];
+                        });
                     } else {
-                        return [{
+                        events.push({
                             event: "IllegalMove",
                             user: cmd.user,
                             name: cmd.name,
                             timeStamp: cmd.timeStamp,
                             move: cmd.move
-                        }];
+                        });
                     }
+                    return events;
                 }
             };
             return commandHandlers[cmd.cmd](cmd);
