@@ -434,7 +434,7 @@ describe('Draw', function() {
         }, {
             event: "GameDraw",
             user: {
-                userName: "TestUser2"
+                userName: "TestUser1"
             },
             name: "TestGame1",
             timeStamp: "2014-12-04T15:15:15"

@@ -12,6 +12,7 @@ module.exports = function(history) {
     var moveCount = 0;
     var lastMove = "";
     var won = false;
+    var draw = false;
 
     function checkIfWon(){
     	for (var i = 0; i < 3; i++) {
@@ -43,6 +44,11 @@ module.exports = function(history) {
 
     }
 
+    function checkForDraw(){
+    	if(moveCount >= 9){
+    		draw = true;
+    	}
+    }
     function processEvent(event) {
         if (event.event === "GameJoined") {
             gameFull = true;
@@ -53,6 +59,7 @@ module.exports = function(history) {
             lastMove = event.move.side;
             gameGrid[event.move.coordinates[0]][event.move.coordinates[1]] = event.move.side;
             checkIfWon();
+            checkForDraw();
         }
     }
 
@@ -71,6 +78,9 @@ module.exports = function(history) {
         },
         gameWon: function() {
             return won;
+        },
+        gameDraw: function(){
+        	return draw;
         }
     };
 };

@@ -50,11 +50,19 @@ module.exports = function(history) {
                             move: cmd.move
                         });
                     }
-                    history = history.concat(events);
-                    gameState.processEvents(history);
+                    //history = history.concat(events);
+                    gameState.processEvents(events);
                     if (gameState.gameWon()) {
                         events.push({
                             event: "GameWon",
+                            user: cmd.user,
+                            name: cmd.name,
+                            timeStamp: cmd.timeStamp
+                        });
+                    }
+                    else if (gameState.gameDraw()) {
+                        events.push({
+                            event: "GameDraw",
                             user: cmd.user,
                             name: cmd.name,
                             timeStamp: cmd.timeStamp
