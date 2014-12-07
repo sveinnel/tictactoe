@@ -11,20 +11,12 @@ module.exports = function(history){
   function processEvent(event) {
     if (event.event === "GameJoined") {
       gameFull = true;
-    
     }
     
-
-	if (event.event === "MovePlaced") {
-	  	
+	if (event.event === "MovePlaced") {  	
 	  	moveCount ++;
 	  	lastMove = event.move.side;
-	  	
     }
-
-  	//console.log("Event", event)
-  	console.log("lastMove: ", lastMove);
-  	console.log("moveCount ", moveCount);
   }
    
   function processEvents(history){
@@ -37,8 +29,6 @@ module.exports = function(history){
     	return gameFull;
     },
     okToMove: function(cmd){
-    	console.log("cmd in okToMove" , cmd);
-
     	return  cmd.move.side !== lastMove;
     }
   };

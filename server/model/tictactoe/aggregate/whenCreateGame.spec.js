@@ -15,16 +15,14 @@ describe('CreateGame command', function() {
       name: "TestGame1",
       timeStamp: "2014-12-04T15:15:15"
     };
-    var then = [
-      {
+    var then = [{
         event: "GameCreated",
         user: {
           userName: "TestUser1"
         },
         name: "TestGame1",
         timeStamp: "2014-12-04T15:15:15"
-      }
-    ];
+      }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
     should(actualEvents.length).be.exactly(1);

@@ -5,7 +5,6 @@ module.exports = function(history){
 
 	return {
 		executeCommand: function(cmd){
-		//console.log("CMD:" , cmd);
 			var commandHandlers = {
 				"CreateGame": function(cmd){
 					return {
@@ -56,8 +55,7 @@ module.exports = function(history){
 					}
 				}
 			};
-			history.push(commandHandlers[cmd.cmd](cmd));
-			return history;
+			return [commandHandlers[cmd.cmd](cmd)];
 		}
 	}
 }
