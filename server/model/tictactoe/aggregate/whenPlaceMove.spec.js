@@ -183,11 +183,26 @@ describe('Player one PlaceMove command when Player two move', function() {
           coordinates: [0,0],
           side: 'X'
         }
-      }];
+      },
+      {
+        event: "IllegalMove",
+        user: {
+          userName: "TestUser1"
+        },
+        name: "TestGame1",
+        timeStamp: "2014-12-04T15:15:15",
+        move: {
+          coordinates: [0,1],
+          side: 'X'
+        }
+      }
+    ];
 
     var actualEvents = tictactoe(given).executeCommand(when);
-    should(actualEvents.length).be.exactly(0);
+    should(actualEvents.length).be.exactly(2);
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
   });
 });
+
+
  

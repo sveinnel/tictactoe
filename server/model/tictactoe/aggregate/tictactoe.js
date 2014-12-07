@@ -5,6 +5,7 @@ module.exports = function(history){
 
 	return {
 		executeCommand: function(cmd){
+		//console.log("CMD:" , cmd);
 			var commandHandlers = {
 				"CreateGame": function(cmd){
 					return {
@@ -34,14 +35,25 @@ module.exports = function(history){
 					}
 				},
 				"PlaceMove": function(cmd){
-					
-					return {
-						event: "MovePlaced",
-				        user: cmd.user,
-				        name: cmd.name,
-				        timeStamp: cmd.timeStamp,
-				        move: cmd.move
-					};
+					if(gameState.okToMove(cmd)){
+						return {
+							event: "MovePlaced",
+					        user: cmd.user,
+					        name: cmd.name,
+					        timeStamp: cmd.timeStamp,
+					        move: cmd.move
+						};
+					}
+					else
+					{
+						return {
+							event:"IllegalMove",
+							user: cmd.user,
+							name:cmd.name,
+							timeStamp:cmd.timeStamp,
+							move: cmd.move
+				        };
+					}
 				}
 			};
 			history.push(commandHandlers[cmd.cmd](cmd));
