@@ -33,7 +33,6 @@ module.exports = function(history) {
                 },
                 "PlaceMove": function(cmd) {
                     var events  = []
-                    console.log('history', history);
                     if (gameState.okToMove(cmd)) {
                         events.push({
                             event: "MovePlaced",

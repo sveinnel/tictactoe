@@ -16,6 +16,7 @@ module.exports = function(history){
 	if (event.event === "MovePlaced") {  	
 	  	moveCount ++;
 	  	lastMove = event.move.side;
+	  	gameGrid[event.move.coordinates[0]][event.move.coordinates[1]] = event.move.side;
     }
   }
    
@@ -29,7 +30,8 @@ module.exports = function(history){
     	return gameFull;
     },
     okToMove: function(cmd){
-    	return  cmd.move.side !== lastMove;
+    	return  cmd.move.side !== lastMove &&
+    			gameGrid[cmd.move.coordinates[0]][cmd.move.coordinates[1]] === '';
     }
   };
 };

@@ -104,7 +104,7 @@ describe('Player two PlaceMove command', function() {
 
 
 describe('Player one PlaceMove command when Player two move', function() {
-    it('should emit not be able to play', function() {
+    it('should emit IllegalMove', function() {
 
         var given = [{
             event: "MovePlaced",
@@ -142,6 +142,54 @@ describe('Player one PlaceMove command when Player two move', function() {
             move: {
                 coordinates: [0, 1],
                 side: 'X'
+            }
+        }];
+
+        var actualEvents = tictactoe(given).executeCommand(when);
+        should(actualEvents.length).be.exactly(1);
+        should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+    });
+});
+
+describe('Player two PlaceMove where Player one has allready placed move', function() {
+    it('should emit IllegalMove', function() {
+
+        var given = [{
+            event: "MovePlaced",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 0],
+                side: 'X'
+            }
+        }];
+
+        var when = {
+            cmd: "PlaceMove",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 0],
+                side: 'O'
+            }
+        };
+
+        var then = [{
+            event: "IllegalMove",
+            user: {
+                userName: "TestUser1"
+            },
+            name: "TestGame1",
+            timeStamp: "2014-12-04T15:15:15",
+            move: {
+                coordinates: [0, 0],
+                side: 'O'
             }
         }];
 
@@ -248,7 +296,6 @@ describe('Player one won', function() {
         }];
 
         var actualEvents = tictactoe(given).executeCommand(when);
-        console.log('actualEvents', actualEvents);
         should(actualEvents.length).be.exactly(2);
         should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
     });
