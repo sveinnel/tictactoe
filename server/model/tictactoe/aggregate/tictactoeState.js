@@ -15,6 +15,7 @@ module.exports = function(history) {
     var draw = false;
 
     function checkIfWon(){
+    	//Check for columns and rows
     	for (var i = 0; i < 3; i++) {
     		if(gameGrid[i][0] === gameGrid[i][1] && gameGrid[i][0] === gameGrid[i][2]){
     			if(gameGrid[i][0] !== ''){
@@ -30,18 +31,17 @@ module.exports = function(history) {
     		}
     	}
     	
+    	//Check diagonally
     	if(gameGrid[0][0] === gameGrid[1][1] && gameGrid[0][0] === gameGrid[2][2]){
     		if(gameGrid[0][0] !== ''){
 				won = true;
 			}
     	}
-
     	if(gameGrid[0][2] === gameGrid[1][1] && gameGrid[0][2] === gameGrid[2][0]){
     		if(gameGrid[0][2] !== ''){
 				won = true;
 			}
     	}
-
     }
 
     function checkForDraw(){
@@ -49,6 +49,7 @@ module.exports = function(history) {
     		draw = true;
     	}
     }
+
     function processEvent(event) {
         if (event.event === "GameJoined") {
             gameFull = true;
