@@ -4,7 +4,7 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 
-describe('GET /api/createGame', function() {
+describe('POST /api/createGame', function() {
   it('should respond with event as JSON array', function(done) {
     var command = {
       id: "test-id",
@@ -17,10 +17,11 @@ describe('GET /api/createGame', function() {
     };
 
     request(app)
-      .post('/api/creategame')
+      .post('/api/createGame')
       .type('json')
       .send(command)
       .end(function(err, res) {
+
         if (err) return done(err);
         res.body.should.be.instanceof(Array);
         done();
