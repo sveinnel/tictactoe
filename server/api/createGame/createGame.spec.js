@@ -16,14 +16,27 @@ describe('POST /api/createGame', function() {
       timeStamp: "2014-12-04T15:15:15"
     };
 
+    var responceEvent = [{
+      id: "test-id",
+      event: "GameCreated",
+      user: {
+        userName: "TestUser1"
+      },
+      name: "TestGame1",
+      timeStamp: "2014-12-04T15:15:15"
+    }];
+
     request(app)
       .post('/api/createGame')
       .type('json')
       .send(command)
       .end(function(err, res) {
 
-        if (err) return done(err);
+        if(err){
+          return done(err);
+        }
         res.body.should.be.instanceof(Array);
+        res.body.should.eql(responceEvent);
         done();
       });
   });
