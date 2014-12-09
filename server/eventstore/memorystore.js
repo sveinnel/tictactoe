@@ -10,7 +10,13 @@ module.exports = function() {
             }
         },
         storeEvents: function(id, events) {
-            store[id] = (store[id] || []).concat(events);
+            if(id in store){
+            	store[id] = store[id].concat(events);
+            }
+            else{
+            	store[id] = events;
+
+            }
         }
     }
 }
