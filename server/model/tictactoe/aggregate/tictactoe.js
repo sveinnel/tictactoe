@@ -16,29 +16,36 @@ module.exports = function(history) {
                     }];
                 },
                 "JoinGame": function(cmd) {
-                    if (!gameState.gameFull()) {
-                        return [{
-                        	id: cmd.id,
-                            event: "GameJoined",
-                            user: cmd.user,
-                            name: cmd.name,
-                            timeStamp: cmd.timeStamp
-                        }];
-                    } else {
-                        return [{
-                        	id: cmd.id,
-                            event: "FullGameJoinAttempted",
-                            user: cmd.user,
-                            name: cmd.name,
-                            timeStamp: cmd.timeStamp
-                        }];
-                    }
+                	if(gameState.created()){
+	                    if (!gameState.gameFull()) {
+	                        return [{
+	                            event: "GameJoined",
+	                            user: cmd.user,
+	                            name: cmd.name,
+	                            timeStamp: cmd.timeStamp
+	                        }];
+	                    } else {
+	                        return [{
+	                            event: "FullGameJoinAttempted",
+	                            user: cmd.user,
+	                            name: cmd.name,
+	                            timeStamp: cmd.timeStamp
+	                        }];
+	                    }
+                	}
+                	else{
+                		return [{
+	                            event: "NotExistingGameJoinAttempted",
+	                            user: cmd.user,
+	                            name: cmd.name,
+	                            timeStamp: cmd.timeStamp
+	                        }];
+                	}
                 },
                 "PlaceMove": function(cmd) {
                     var events = []
                     if (gameState.okToMove(cmd)) {
                         events.push({
-                        	id: cmd.id,
                             event: "MovePlaced",
                             user: cmd.user,
                             name: cmd.name,
@@ -47,7 +54,6 @@ module.exports = function(history) {
                         });
                     } else {
                         events.push({
-                        	id: cmd.id,
                             event: "IllegalMove",
                             user: cmd.user,
                             name: cmd.name,
@@ -59,7 +65,6 @@ module.exports = function(history) {
                     gameState.processEvents(events);
                     if (gameState.gameWon()) {
                         events.push({
-                        	id: cmd.id,
                             event: "GameWon",
                             user: cmd.user,
                             name: cmd.name,
@@ -68,7 +73,6 @@ module.exports = function(history) {
                     }
                     else if (gameState.gameDraw()) {
                         events.push({
-                        	id: cmd.id,
                             event: "GameDraw",
                             user: cmd.user,
                             name: cmd.name,

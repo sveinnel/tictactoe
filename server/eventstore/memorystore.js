@@ -3,19 +3,22 @@ module.exports = function() {
     return {
         loadEvents: function(id) {
             if (id in store) {
-            	return store[id]       
+                return store[id]       
             }
             else{
-            	return [];
+                return [];
             }
         },
         storeEvents: function(id, events) {
             if(id in store){
-            	store[id] = store[id].concat(events);
+                store[id] = store[id].concat(events);
             }
             else{
-            	store[id] = events;
+                store[id] = events;
             }
+        },
+        loadAllEvents: function(){
+            return store;
         }
     }
 }

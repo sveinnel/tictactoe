@@ -7,7 +7,6 @@ var request = require('supertest');
 describe('POST /api/createGame', function() {
   it('should respond with event as JSON array', function(done) {
     var command = {
-      id: "test-id",
       cmd: "CreateGame",
       user: {
         userName: "TestUser1"
@@ -17,7 +16,6 @@ describe('POST /api/createGame', function() {
     };
 
     var responceEvent = [{
-      id: "test-id",
       event: "GameCreated",
       user: {
         userName: "TestUser1"
@@ -36,8 +34,11 @@ describe('POST /api/createGame', function() {
           return done(err);
         }
         res.body.should.be.instanceof(Array);
-        res.body.should.eql(responceEvent);
+
+        res.body[0].name.should.be.exactly('TestGame1');
         done();
       });
   });
 });
+
+

@@ -13,6 +13,7 @@ module.exports = function(history) {
     var lastMove = "";
     var won = false;
     var draw = false;
+    var created = false;
 
     function checkIfWon(){
     	//Check for columns and rows
@@ -51,6 +52,10 @@ module.exports = function(history) {
     }
 
     function processEvent(event) {
+        if (event.event === "GameCreated") {
+            created = true;
+        }
+
         if (event.event === "GameJoined") {
             gameFull = true;
         }
@@ -72,6 +77,9 @@ module.exports = function(history) {
         processEvents: processEvents,
         gameFull: function() {
             return gameFull;
+        },
+        created: function(){
+            return created;
         },
         okToMove: function(cmd) {
             return cmd.move.side !== lastMove &&

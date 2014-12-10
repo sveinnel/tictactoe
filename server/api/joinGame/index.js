@@ -7,9 +7,10 @@ module.exports = function(app){
 
   var router = express.Router();
 
-  router.post('/', controller.createGame);
+  router.post('/', controller.joinGame);
 
   return {
     router:router 
-  };
+  }
+
 }
