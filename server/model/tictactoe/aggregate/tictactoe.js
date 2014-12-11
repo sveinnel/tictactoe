@@ -2,7 +2,6 @@ module.exports = function(history) {
     var tictactoeState = require('./tictactoeState');
     var gameState = tictactoeState(history);   
     gameState.processEvents(history);
-
     return {
         executeCommand: function(cmd) {
             var commandHandlers = {
