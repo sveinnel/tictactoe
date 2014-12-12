@@ -1,5 +1,6 @@
 module.exports = function() {
     var store = {};
+    console.log("store", store);
     return {
         loadEvents: function(id) {
             if (id in store) {

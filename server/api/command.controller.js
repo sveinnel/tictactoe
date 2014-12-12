@@ -14,6 +14,7 @@ module.exports = function(req, res) {
                     app.eventStore = require('../eventstore/memorystore')();
                 }
                 req.body.id = uuid.v1();
+                req.body.timeStamp = new Date;
                 var context = boundedContext(app.eventStore, tictactoeHandler);
                 var newEventHistory = context.handleCommand(req.body);
                 res.json(newEventHistory);
@@ -26,6 +27,7 @@ module.exports = function(req, res) {
                 if (!app.eventStore) {
                     app.eventStore = require('../eventstore/memorystore')();
                 }
+                req.body.timeStamp = new Date;
                 var context = boundedContext(app.eventStore, tictactoeHandler);
                 var newEventHistory = context.handleCommand(req.body);
                 res.json(newEventHistory);
@@ -38,6 +40,7 @@ module.exports = function(req, res) {
                 if (!app.eventStore) {
                     app.eventStore = require('../eventstore/memorystore')();
                 }
+                req.body.timeStamp = new Date;
                 var context = boundedContext(app.eventStore, tictactoeHandler);
                 var newEventHistory = context.handleCommand(req.body);
                 res.json(newEventHistory);

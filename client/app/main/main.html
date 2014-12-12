@@ -1,28 +1,60 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
+<header class="hero-unit" id="banner" >
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <h1>Tic Tac Toe</h1>
+    <p class="lead">Play the wonderful game of Tic Tac Toe</p>
   </div>
 </header>
-
-<div class="container">
+<div class="container" ng-controller="MainCtrl">
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+    
+    <div class="col-lg-4">
+      <h1 class="page-header">Games</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <ul class="listOfGames">
+              <li class="animate-repeat" ng-repeat="game in listOfGames">
+                <a href="" ng-click="joinGame(game.id, game.name)"> {{game.name}}</a>
+              </li>
+            </ul>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Your Name" ng-model="userName">
+              <input type="text" class="form-control" placeholder="Your Game Name" ng-model="gameName">
+            </div>
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="createGame()">Create Game</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="col-lg-4" ng-show="showGame">
+      <h1 class="page-header">{{gameName}}</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([0,0])">{{cell[0][0]}}</div>
+          <div class="col-lg-2 ticCell text-center borderLeft borderRight" ng-click="cellClick([0,1])">{{cell[0][1]}}</div>
+          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([0,2])">{{cell[0][2]}}</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 ticCell text-center borderTop borderBottom" ng-click="cellClick([1,0])">{{cell[1][0]}}</div>
+          <div class="col-lg-2 ticCell text-center borderTop borderBottom borderLeft borderRight" ng-click="cellClick([1,1])">{{cell[1][1]}}</div>
+          <div class="col-lg-2 ticCell text-center borderTop borderBottom" ng-click="cellClick([1,2])">{{cell[1][2]}}</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([2,0])">{{cell[2][0]}}</div>
+          <div class="col-lg-2 ticCell text-center borderLeft borderRight" ng-click="cellClick([2,1])">{{cell[2][1]}}</div>
+          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([2,2])">{{cell[2][2]}}</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+  
+  <footer class="footer">
+    <div class="container">
+      <p>Tic Tac Toe v9999</p>
+    </div>
+  </footer>
