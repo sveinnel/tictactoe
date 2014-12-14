@@ -1,25 +1,9 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-14T21:47:10" id="0" hostname="Snulla" tests="1" errors="1" failures="1" time="0.037">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-14T22:37:22" id="0" hostname="Snulla" tests="0" errors="1" failures="0" time="0">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
-    <testcase name="should attach a list of things to the scope" time="0.037" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl">
-      <failure type="">ReferenceError: Can&apos;t find variable: io
-    at /home/sveinn/hgop/tictactoe/tictactoe/client/app/main/main.controller.js:4
-    at invoke (/home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular/angular.js:4138)
-    at instantiate (/home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular/angular.js:4146)
-    at /home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular/angular.js:8384
-    at /home/sveinn/hgop/tictactoe/tictactoe/client/app/main/main.controller.spec.js:20
-    at invoke (/home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular/angular.js:4138)
-    at workFn (/home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular-mocks/angular-mocks.js:2348)
-undefined
-</failure>
-      <failure type="">Error: No pending request to flush !
-    at /home/sveinn/hgop/tictactoe/tictactoe/client/bower_components/angular-mocks/angular-mocks.js:1524
-    at /home/sveinn/hgop/tictactoe/tictactoe/client/app/main/main.controller.spec.js:25
-</failure>
-    </testcase>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>

@@ -22,7 +22,7 @@ angular.module('tictactoeApp')
 			        ['', '', '']
 			    ];
 			    gameId = '';
-		    }
+		    };
 
             $scope.createGame = function() {
             	resetGameBoard();
@@ -43,14 +43,14 @@ angular.module('tictactoeApp')
                         $scope.showGame = true;
                         gameId = data[0].id;
                         opponentJoined = false;
-                    };
+                    }
 
                     console.log('listOfGames',$scope.listOfGames);
                 })
                 .error(function(data, status, headers, config) {
 
                 });
-            }
+            };
 
             $scope.joinGame = function(id, gameName) {
 
@@ -75,10 +75,10 @@ angular.module('tictactoeApp')
 		            			socket.emit('joinOpponent', {id: id}); 
 		                    }
 		                    if(data[0].event === 'FullGameJoinAttempted'){
-		                    	alert("Game allready full!");
+		                    	alert('Game allready full!');
 		                    }
 		                    if(data[0].event === 'NotExistingGameJoinAttempted'){
-		                    	alert("Game does not exist!");
+		                    	alert('Game does not exist!');
 		                    }
 		                })
 		                .error(function(data, status, headers, config) {

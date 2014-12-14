@@ -31,7 +31,7 @@ io.on('connection', function (socket) {
 	socket.on('placeMove', function(cmd){
 		for (var i = 0; i < sockets.length; i++) {
 			sockets[i].emit('movePlaced', cmd);
-		};
+		}
 	});
 	socket.on('updateGames', function(){
 		var listOfGames = app.eventStore.getAllGames(); 

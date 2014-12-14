@@ -26,7 +26,7 @@ module.exports = function() {
                         joined = true;
                         break;
                     }
-                };
+                }
                 if(!joined){
                     listOfGames.push({
                                         id: evt,
@@ -34,6 +34,7 @@ module.exports = function() {
                                     });
                 }
             }
+            console.log("listOfGames", listOfGames);
             return listOfGames;
         }
     };
