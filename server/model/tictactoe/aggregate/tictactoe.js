@@ -33,7 +33,7 @@ module.exports = function(history) {
 	                    }
                 	}
                 	else{
-                		return [{
+                		return [{cmd:cmd,
 	                            event: "NotExistingGameJoinAttempted",
 	                            user: cmd.user,
 	                            name: cmd.name,

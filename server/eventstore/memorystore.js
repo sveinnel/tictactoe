@@ -1,6 +1,5 @@
 module.exports = function() {
     var store = {};
-    console.log("store", store);
     return {
         loadEvents: function(id) {
             if (id in store) {
@@ -18,8 +17,24 @@ module.exports = function() {
                 store[id] = events;
             }
         },
-        loadAllEvents: function(){
-            return store;
+        getAllGames: function(){
+            var listOfGames = [];
+            for (var evt in store) {
+                var joined = false;
+                for (var i = 0; i < store[evt].length; i++) {
+                    if(store[evt][i].event === 'GameJoined'){
+                        joined = true;
+                        break;
+                    }
+                };
+                if(!joined){
+                    listOfGames.push({
+                                        id: evt,
+                                        name: store[evt][0].name
+                                    });
+                }
+            }
+            return listOfGames;
         }
-    }
+    };
 }

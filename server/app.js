@@ -11,8 +11,11 @@ var express = require('express');
 var config = require('./config/environment');
 // Setup server
 var app = express();
+app.appName = "TicTacToe" + new Date();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+
+app.eventStore = require('./eventstore/memorystore')();
 
 require('./config/express')(app);
 require('./routes')(app);
@@ -22,16 +25,39 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-app.eventStore = require('./eventstore/memorystore')();
-
-app.appName = "TicTacToe";
-
-io.sockets.on('connection', function (socket) {
-	socket.on('placeMove', function(msg){
-		socket.emit('movePlaced', msg);
-	})
+var sockets = []
+io.on('connection', function (socket) {
+	sockets.push(socket);
+	socket.on('placeMove', function(cmd){
+		for (var i = 0; i < sockets.length; i++) {
+			sockets[i].emit('movePlaced', cmd);
+		};
+		//socket.emit('movePlaced', board);
+	});
+	socket.on('updateGames', function(){
+		var listOfGames = app.eventStore.getAllGames(); 
+		for (var i = 0; i < sockets.length; i++) {
+			sockets[i].emit('gamesUpdated', listOfGames);
+		}
+	});
+	socket.on('wonGame', function(msg){
+		for (var i = 0; i < sockets.length; i++) {
+			sockets[i].emit('gameWon', msg);
+		}
+	});
+	socket.on('drawGame', function(msg){
+		for (var i = 0; i < sockets.length; i++) {
+			sockets[i].emit('gameDraw', msg);
+		}
+	});
+	socket.on('joinOpponent', function(msg){
+		for (var i = 0; i < sockets.length; i++) {
+			sockets[i].emit('opponentJoined', msg);
+		}
+	});
+	
 });
  
-
 // Expose app
-exports = module.exports = app;
+//exports = module.exports = app;
+module.exports = app;

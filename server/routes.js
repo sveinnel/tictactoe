@@ -7,7 +7,6 @@
 var errors = require('./components/errors');
 
 module.exports = function(app) {
-
   // Create new Game
   app.use('/api/createGame', require('./api/createGame')(app).router);
   //Join Created game
