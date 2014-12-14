@@ -78,7 +78,7 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.spec.js',
           '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ],
-        tasks: ['karma']
+        tasks: ['newer:jshint:all', 'karma']
       },
       injectLess: {
         files: [
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
         src: ['server/**/*.spec.js']
       },
       all: [
-        '<%= yeoman.client %>/{app,components}/**/*.js',
+        '!<%= yeoman.client %>/{app,components}/**/*.js',
         '!<%= yeoman.client %>/{app,components}/**/*.spec.js',
         '!<%= yeoman.client %>/{app,components}/**/*.mock.js'
       ],
