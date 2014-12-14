@@ -58,5 +58,5 @@ io.on('connection', function (socket) {
 });
  
 // Expose app
-//exports = module.exports = app;
-module.exports = app;
+exports = module.exports = app;
+//module.exports = app;
