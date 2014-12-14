@@ -42,6 +42,7 @@ angular.module('tictactoeApp')
                         socket.emit('updateGames');
                         $scope.showGame = true;
                         gameId = data[0].id;
+                        opponentJoined = false;
                     };
 
                     console.log('listOfGames',$scope.listOfGames);
@@ -53,38 +54,36 @@ angular.module('tictactoeApp')
 
             $scope.joinGame = function(id, gameName) {
 
-	            	resetGameBoard();
-	                $http.post('/api/joinGame', {
-	                	id: id,
-	                    cmd: 'JoinGame',
-	                    name: gameName,
-	                    user: {
-	                        userName: $scope.userName
-	                    }   
-	                })
-	                .success(function(data, status, headers, config) {
-	                    
-	                    console.log('joinGame DATA', data);
-	            		socket.emit('updateGames'); 
-	                    if(data[0].event === 'GameJoined'){
-	                    	$scope.side = 'O';
-	                    	$scope.showGame = true;
-	                    	$scope.gameName = data[0].name;
-	                    	gameId = id;
-	            			socket.emit('joinOpponent', {id: id}); 
-	                    }
-	                    if(data[0].event === 'FullGameJoinAttempted'){
-	                    	alert("Game allready full!");
-	                    }
-	                    if(data[0].event === 'NotExistingGameJoinAttempted'){
-	                    	alert("Game does not exist!");
-	                    }
-	                })
-	                .error(function(data, status, headers, config) {
-	                });
-            		
-              
-
+	            	if($scope.side !== 'X'){
+		                $http.post('/api/joinGame', {
+		                	id: id,
+		                    cmd: 'JoinGame',
+		                    name: gameName,
+		                    user: {
+		                        userName: $scope.userName
+		                    }   
+		                })
+		                .success(function(data, status, headers, config) {
+	            			resetGameBoard();
+		                    console.log('joinGame DATA', data);
+		            		socket.emit('updateGames'); 
+		                    if(data[0].event === 'GameJoined'){
+		                    	$scope.side = 'O';
+		                    	$scope.showGame = true;
+		                    	$scope.gameName = data[0].name;
+		                    	gameId = id;
+		            			socket.emit('joinOpponent', {id: id}); 
+		                    }
+		                    if(data[0].event === 'FullGameJoinAttempted'){
+		                    	alert("Game allready full!");
+		                    }
+		                    if(data[0].event === 'NotExistingGameJoinAttempted'){
+		                    	alert("Game does not exist!");
+		                    }
+		                })
+		                .error(function(data, status, headers, config) {
+		                });
+	            	}
             };
 
             $scope.cellClick = function(coords) {

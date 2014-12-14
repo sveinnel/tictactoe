@@ -32,7 +32,6 @@ io.on('connection', function (socket) {
 		for (var i = 0; i < sockets.length; i++) {
 			sockets[i].emit('movePlaced', cmd);
 		};
-		//socket.emit('movePlaced', board);
 	});
 	socket.on('updateGames', function(){
 		var listOfGames = app.eventStore.getAllGames(); 
