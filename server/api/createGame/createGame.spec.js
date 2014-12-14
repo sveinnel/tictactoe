@@ -12,7 +12,6 @@ describe('POST /api/createGame', function() {
         userName: "TestUser1"
       },
       name: "TestGame1",
-      timeStamp: "2014-12-04T15:15:15"
     };
 
     var responceEvent = [{
@@ -21,7 +20,6 @@ describe('POST /api/createGame', function() {
         userName: "TestUser1"
       },
       name: "TestGame1",
-      timeStamp: "2014-12-04T15:15:15"
     }];
 
     request(app)
@@ -35,7 +33,7 @@ describe('POST /api/createGame', function() {
         }
         res.body.should.be.instanceof(Array);
 
-        res.body[0].name.should.be.exactly('TestGame1');
+        res.body[0].event.should.be.exactly('GameCreated');
         done();
       });
   });

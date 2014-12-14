@@ -1,6 +1,7 @@
 'use strict';
 angular.module('tictactoeApp')
     .controller('MainCtrl', function($scope, $http) {
+            var socket = io();
             $scope.gameName = "";
             $scope.showGame = false;
             $scope.listOfGames = [];
@@ -64,7 +65,7 @@ angular.module('tictactoeApp')
 
             $scope.cellClick = function(coords) {
                 console.log(coords);
-
+                
                 $http.post('/api/placeMove', {
                         id: gameId,
                         cmd: "PlaceMove",
@@ -81,6 +82,7 @@ angular.module('tictactoeApp')
                     console.log("placeMOve DATA", data);
                     if(data[0].event === "MovePlaced"){
                 		$scope.cell[coords[0]][coords[1]] = $scope.side;
+                		socket.emit("placeMove", $scope.cell);
                     }
 					if(data[0].event === "IllegalMove"){
 						var oldCellvalue = $scope.cell[coords[0]][coords[1]];
@@ -104,4 +106,12 @@ angular.module('tictactoeApp')
                 });
 
             };
+
+            socket.on("movePlaced", function(msg){
+            	$scope.cell = msg;
+            });
+
+            socket.on("updateGames", function(msg){
+            	$scope.listOfGames = msg;
+            });
     });

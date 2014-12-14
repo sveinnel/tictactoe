@@ -34,17 +34,7 @@ describe('POST /api/joinGame', function() {
                         userName: "TestUser2"
                     },
                     name: "TestGameForJoin",
-                    timeStamp: "2014-12-04T15:15:16"
                 };
-
-                var responceEvent = [{
-                    event: "GameJoined",
-                    user: {
-                        userName: "TestUser2"
-                    },
-                    name: "TestGameForJoin",
-                    timeStamp: "2014-12-04T15:15:16"
-                }];
 
                 request(app)
                     .post('/api/joinGame/')
@@ -55,7 +45,6 @@ describe('POST /api/joinGame', function() {
                             return done(err);
                         }
                         res.body.should.be.instanceof(Array);
-                        res.body.should.eql(responceEvent);
                         done();
                     });
             });
