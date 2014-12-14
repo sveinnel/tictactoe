@@ -2,29 +2,29 @@
 angular.module('tictactoeApp')
     .controller('MainCtrl', function($scope, $http) {
             var socket = io();
-            $scope.gameName = "";
+            $scope.gameName = '';
             $scope.showGame = false;
             $scope.listOfGames = [];
-            $scope.side = "";
+            $scope.side = '';
             $scope.cell = [
 		        ['', '', ''],
 		        ['', '', ''],
 		        ['', '', '']
 		    ];
-            var gameId = "";
+            var gameId = '';
             $scope.createGame = function() {
-            	$scope.side = "X";
+            	$scope.side = 'X';
                 $http.post('/api/createGame', {
-                    cmd: "CreateGame",
+                    cmd: 'CreateGame',
                     user: {
                         userName: $scope.userName
                     },
                     name: $scope.gameName
                 })
                 .success(function(data, status, headers, config) {
-                    console.log("CREATE DATA", data);
+                    console.log('CREATE DATA', data);
                     
-                    if (data[0].event === "GameCreated") {
+                    if (data[0].event === 'GameCreated') {
                         $scope.listOfGames.push({
                             name: data[0].name,
                             id: data[0].id
@@ -33,7 +33,7 @@ angular.module('tictactoeApp')
                         gameId = data[0].id;
                     };
 
-                    console.log("listOfGames",$scope.listOfGames);
+                    console.log('listOfGames',$scope.listOfGames);
                 })
                 .error(function(data, status, headers, config) {
 
@@ -43,7 +43,7 @@ angular.module('tictactoeApp')
             $scope.joinGame = function(id, gameName) {                
                 $http.post('/api/joinGame', {
                 	id: gameId,
-                    cmd: "JoinGame",
+                    cmd: 'JoinGame',
                     name: gameName,
                     user: {
                         userName: $scope.userName
@@ -51,9 +51,9 @@ angular.module('tictactoeApp')
                 })
                 .success(function(data, status, headers, config) {
                     
-                    console.log("joinGame DATA", data);
-                    if(data[0].event === "GameJoined"){
-                    	$scope.side = "O";
+                    console.log('joinGame DATA', data);
+                    if(data[0].event === 'GameJoined'){
+                    	$scope.side = 'O';
                     	$scope.showGame = true;
                     	$scope.gameName = data[0].name;
                     }
@@ -68,7 +68,7 @@ angular.module('tictactoeApp')
                 
                 $http.post('/api/placeMove', {
                         id: gameId,
-                        cmd: "PlaceMove",
+                        cmd: 'PlaceMove',
                         user: {
                             userName: $scope.userName
                         },
@@ -79,25 +79,25 @@ angular.module('tictactoeApp')
                         }
                 })
                 .success(function(data, status, headers, config) {
-                    console.log("placeMOve DATA", data);
-                    if(data[0].event === "MovePlaced"){
+                    console.log('placeMOve DATA', data);
+                    if(data[0].event === 'MovePlaced'){
                 		$scope.cell[coords[0]][coords[1]] = $scope.side;
-                		socket.emit("placeMove", $scope.cell);
+                		socket.emit('placeMove', $scope.cell);
                     }
-					if(data[0].event === "IllegalMove"){
+					if(data[0].event === 'IllegalMove'){
 						var oldCellvalue = $scope.cell[coords[0]][coords[1]];
-                		$scope.cell[coords[0]][coords[1]] = "!";
+                		$scope.cell[coords[0]][coords[1]] = '!';
                 		setTimeout(function() {
                 			$scope.cell[coords[0]][coords[1]] = oldCellvalue;
                 			$scope.$apply();
                 		}, 500);
                     }
                     if(data.length === 2){
-                    	if(data[1].event === "GameWon"){
-                    		$scope.gameName = data[1].user.userName + "is the Winner!" 
+                    	if(data[1].event === 'GameWon'){
+                    		$scope.gameName = data[1].user.userName + 'is the Winner!' 
                     	}
-                    	if(data[1].event === "GameDraw"){
-                    		$scope.gameName = "It\'s a draw!" 
+                    	if(data[1].event === 'GameDraw'){
+                    		$scope.gameName = 'It\'s a draw!' 
                     	}
                     }                    
                 })
@@ -107,11 +107,11 @@ angular.module('tictactoeApp')
 
             };
 
-            socket.on("movePlaced", function(msg){
+            socket.on('movePlaced', function(msg){
             	$scope.cell = msg;
             });
 
-            socket.on("updateGames", function(msg){
+            socket.on('updateGames', function(msg){
             	$scope.listOfGames = msg;
             });
     });
