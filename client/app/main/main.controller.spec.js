@@ -15,6 +15,9 @@ describe('Controller: MainCtrl', function () {
     $httpBackend.when('POST', '/api/createGame')
       .respond([{event: 'GameCreated', id: 'testId'}]);
 
+    $httpBackend.when('POST', '/api/joinGame')
+      .respond([{event: 'GameJoined', id: 'testId', name: 'testGame'}]);
+
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
@@ -32,5 +35,15 @@ describe('Controller: MainCtrl', function () {
     expect(scope.side).toBe('X');
   });
 
+  it('should be abele to join game', function () {
+    
+    expect(scope.gameName).toBe('');
+    scope.userName = 'tester';
+    scope.joinGame('testId', 'testGame');
+    $httpBackend.flush();
+    expect(scope.showGame).toBe(true);
+    expect(scope.side).toBe('O');
+    expect(scope.gameName).toBe('testGame');
+  });
 
 });
