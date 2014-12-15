@@ -27,7 +27,6 @@ describe('POST /api/placeMove', function() {
             .type('json')
             .send(PlaceMoveCommand)
             .end(function(err, res) {
-                console.log("RESPOND: ", res.body);
                 if (err) {
                     return done(err);
                 }
