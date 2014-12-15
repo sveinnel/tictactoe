@@ -12,8 +12,8 @@ angular.module('tictactoeApp')
 		        ['', '', ''],
 		        ['', '', '']
 		    ];
-            var gameId = '';
-            var opponentJoined = false;
+            $scope.gameId = '';
+            $scope.opponentJoined = false;
 
 		    var resetGameBoard = function(){
 		    	 $scope.cell = [
@@ -21,7 +21,7 @@ angular.module('tictactoeApp')
 			        ['', '', ''],
 			        ['', '', '']
 			    ];
-			    gameId = '';
+			    $scope.gameId = '';
 		    };
 
             $scope.createGame = function() {
@@ -38,8 +38,8 @@ angular.module('tictactoeApp')
             			$scope.side = 'X';
                         socket.emit('updateGames');
                         $scope.showGame = true;
-                        gameId = data[0].id;
-                        opponentJoined = false;
+                        $scope.gameId = data[0].id;
+                        $scope.opponentJoined = false;
                     }
                 })
                 .error(function(data, status, headers, config) {
@@ -65,7 +65,7 @@ angular.module('tictactoeApp')
 		                    	$scope.side = 'O';
 		                    	$scope.showGame = true;
 		                    	$scope.gameName = data[0].name;
-		                    	gameId = id;
+		                    	$scope.gameId = id;
 		            			socket.emit('joinOpponent', {id: id}); 
 		                    }
 		                    if(data[0].event === 'FullGameJoinAttempted'){
@@ -81,9 +81,9 @@ angular.module('tictactoeApp')
             };
 
             $scope.cellClick = function(coords) {
-                if(gameId.length > 0 && opponentJoined){
+                if($scope.gameId.length > 0 && $scope.opponentJoined){
 	                $http.post('/api/placeMove', {
-	                        id: gameId,
+	                        id: $scope.gameId,
 	                        cmd: 'PlaceMove',
 	                        user: {
 	                            userName: $scope.userName
@@ -98,7 +98,7 @@ angular.module('tictactoeApp')
 	                    if(data[0].event === 'MovePlaced'){
 	                		$scope.cell[coords[0]][coords[1]] = $scope.side;
 	                		socket.emit('placeMove', {
-	                									id: gameId,
+	                									id: $scope.gameId,
 	                								  	board: $scope.cell
 	                								 });
 	                    }
@@ -113,12 +113,12 @@ angular.module('tictactoeApp')
 	                    if(data.length === 2){
 	                    	if(data[1].event === 'GameWon'){
 	                    		socket.emit('wonGame', {
-	                    									id: gameId, 
+	                    									id: $scope.gameId, 
 	                    									winner: data[1].user.userName
 	                    								});
 	                    	}
 	                    	if(data[1].event === 'GameDraw'){
-	                    		socket.emit('drawGame', {id: gameId});
+	                    		socket.emit('drawGame', {id: $scope.gameId});
 	                    	}
 	                    }                    
 	                })
@@ -130,15 +130,15 @@ angular.module('tictactoeApp')
             };
 
             socket.on('movePlaced', function(cmd){
-            	if(cmd.id === gameId){
+            	if(cmd.id === $scope.gameId){
             		$scope.cell = cmd.board;
             		$scope.$apply();
             	}
             });
 
             socket.on('opponentJoined', function(msg){
-            	if(msg.id === gameId){
-         			opponentJoined = true;
+            	if(msg.id === $scope.gameId){
+         			$scope.opponentJoined = true;
             	}
             });
             
@@ -149,7 +149,7 @@ angular.module('tictactoeApp')
             });
             
             socket.on('gameWon', function(msg){
-            	if(msg.id === gameId){
+            	if(msg.id === $scope.gameId){
             		alert(msg.winner + ' is the Winner!');
             		resetGameBoard();
             		$scope.showGame = false;
@@ -158,7 +158,7 @@ angular.module('tictactoeApp')
             });
 
             socket.on('gameDraw', function(msg){
-            	if(msg.id === gameId){
+            	if(msg.id === $scope.gameId){
             		alert('It\'s a draw!');
             		resetGameBoard();
             		$scope.showGame = false;

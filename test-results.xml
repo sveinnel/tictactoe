@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-15T17:59:26" id="0" hostname="Snulla" tests="2" errors="0" failures="0" time="0.088">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-15T18:55:05" id="0" hostname="Snulla" tests="3" errors="0" failures="0" time="0.076">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
-    <testcase name="should be abele to create game" time="0.075" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
-    <testcase name="should be abele to join game" time="0.013" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
+    <testcase name="should be abele to create game" time="0.053" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
+    <testcase name="should be abele to join game" time="0.008" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
+    <testcase name="should be abele to play move" time="0.015" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>
