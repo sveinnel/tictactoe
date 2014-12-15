@@ -35,17 +35,13 @@ angular.module('tictactoeApp')
                     },
                     name: $scope.gameName
                 })
-                .success(function(data, status, headers, config) {
-                    console.log('CREATE DATA', data);
-                    
+                .success(function(data, status, headers, config) {            
                     if (data[0].event === 'GameCreated') {
                         socket.emit('updateGames');
                         $scope.showGame = true;
                         gameId = data[0].id;
                         opponentJoined = false;
                     }
-
-                    console.log('listOfGames',$scope.listOfGames);
                 })
                 .error(function(data, status, headers, config) {
 
@@ -65,7 +61,6 @@ angular.module('tictactoeApp')
 		                })
 		                .success(function(data, status, headers, config) {
 	            			resetGameBoard();
-		                    console.log('joinGame DATA', data);
 		            		socket.emit('updateGames'); 
 		                    if(data[0].event === 'GameJoined'){
 		                    	$scope.side = 'O';
@@ -101,7 +96,6 @@ angular.module('tictactoeApp')
 	                        }
 	                })
 	                .success(function(data, status, headers, config) {
-	                    console.log('placeMOve DATA', data);
 	                    if(data[0].event === 'MovePlaced'){
 	                		$scope.cell[coords[0]][coords[1]] = $scope.side;
 	                		socket.emit('placeMove', {
