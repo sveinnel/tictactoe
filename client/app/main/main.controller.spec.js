@@ -11,7 +11,9 @@ describe('Controller: MainCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
+    
     $httpBackend = _$httpBackend_;
+
     $httpBackend.when('POST', '/api/createGame')
       .respond([{event: 'GameCreated', id: 'testId'}]);
 
@@ -22,6 +24,7 @@ describe('Controller: MainCtrl', function () {
       .respond([{event: 'MovePlaced'}]);
 
     scope = $rootScope.$new();
+    
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
     });
@@ -54,7 +57,7 @@ describe('Controller: MainCtrl', function () {
     scope.gameId = "testId";
     scope.cellClick([0,0]);
     $httpBackend.flush();
-    expect(scope.cell).toEqual([ [ 'X', '', '' ], [ '', '', '' ], [ '', '', '' ] ]);
+    expect(scope.cell).toEqual([['X','',''],['','',''],['','','']]);
   });
 
 });

@@ -48,7 +48,6 @@ angular.module('tictactoeApp')
             };
 
             $scope.joinGame = function(id, gameName) {
-
 	            	if($scope.side !== 'X'){
 		                $http.post('/api/joinGame', {
 		                	id: id,
@@ -73,6 +72,7 @@ angular.module('tictactoeApp')
 		                    }
 		                    if(data[0].event === 'NotExistingGameJoinAttempted'){
 		                    	alert('Game does not exist!');
+		                    	
 		                    }
 		                })
 		                .error(function(data, status, headers, config) {
@@ -125,7 +125,6 @@ angular.module('tictactoeApp')
 	                .error(function(data, status, headers, config) {
 
 	                });
-                	
                 }
             };
 

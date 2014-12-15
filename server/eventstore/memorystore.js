@@ -34,7 +34,6 @@ module.exports = function() {
                                     });
                 }
             }
-            console.log("listOfGames", listOfGames);
             return listOfGames;
         }
     };
