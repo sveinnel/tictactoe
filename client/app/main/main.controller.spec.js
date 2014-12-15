@@ -1,4 +1,4 @@
-/*'use strict';
+'use strict';
 
 describe('Controller: MainCtrl', function () {
 
@@ -12,8 +12,8 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+    $httpBackend.when('POST', '/api/createGame')
+      .respond([{event: 'GameCreated', id: 'testId'}]);
 
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -21,9 +21,16 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
+  it('should be abele to create game', function () {
+    
+    expect(scope.gameName).toBe('');
+    scope.gameName = 'testGame';
+    scope.userName = 'tester';
+    scope.createGame();
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(scope.showGame).toBe(true);
+    expect(scope.side).toBe('X');
   });
+
+
 });
-*/

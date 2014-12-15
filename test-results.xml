@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-15T15:30:15" id="0" hostname="Snulla" tests="0" errors="1" failures="0" time="0">
+  <testsuite name="PhantomJS 1.9.8 (Linux)" package="" timestamp="2014-12-15T17:52:24" id="0" hostname="Snulla" tests="1" errors="0" failures="0" time="0.055">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
     </properties>
+    <testcase name="should be abele to create game" time="0.055" classname="PhantomJS 1.9.8 (Linux).Controller: MainCtrl"/>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>

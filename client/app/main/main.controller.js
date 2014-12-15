@@ -25,9 +25,6 @@ angular.module('tictactoeApp')
 		    };
 
             $scope.createGame = function() {
-            	resetGameBoard();
-            	socket.emit('updateGames');
-            	$scope.side = 'X';
                 $http.post('/api/createGame', {
                     cmd: 'CreateGame',
                     user: {
@@ -37,6 +34,8 @@ angular.module('tictactoeApp')
                 })
                 .success(function(data, status, headers, config) {            
                     if (data[0].event === 'GameCreated') {
+            			resetGameBoard();
+            			$scope.side = 'X';
                         socket.emit('updateGames');
                         $scope.showGame = true;
                         gameId = data[0].id;
