@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/tictactoe-dev'
+    uri: 'tictactoe:tictactoe@ds063870.mongolab.com:63870/tictactoe-dev'
   },
 
   seedDB: true
