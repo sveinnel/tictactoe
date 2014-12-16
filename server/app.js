@@ -15,24 +15,21 @@ app.appName = "TicTacToe" + new Date();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-
-app.eventStore = require('./eventstore/memorystore/memorystore')();
+app.eventStore = require('.' + config.eventstore)();//require('./eventstore/memorystore/memorystore')();
 
 require('./config/express')(app);
 
 var mongoose = require('mongoose');
 
-console.log("MONGO_URI", config.mongo);
+
 // Connect to database
 console.log("Connecting to mongoDb");
-
 mongoose.connect(config.mongo.uri, config.mongo.options,function(err){
   console.log("connect callback", arguments);
 
 });
 
 require('./routes')(app);
-
 
 
 // Start server
