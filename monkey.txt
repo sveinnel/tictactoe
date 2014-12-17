@@ -1,0 +1,16 @@
+* Breytti reset board þanni að það birti texta í staðin fyrir að vera tómt en samt sem áður var hægt að spila leikinn, þegar maður smellti á
+  fyrsta kassan þá hvarf textinn.
+
+* socket.on opponentJoined : Þegar maður breytir $scope.opponentJoined eigi að vera false í staðinn fyrir true þá brotna engin test og leikurinn
+  verður ekki spilanlegur.
+
+* socket.on movePlaced, ef maður commentar út $scope.apply() þá kemur ekkert upp á boardið þegar maður reynir að spila leikinn.
+
+* Í if(data[1].event === 'GameDraw') í cellclick ef maður sendir wonGame þá fær maður upp undefined is winner þegar leikur endar með jafntefli
+  ef maður sendir bara t.d. lol þá koma engar upplýsingar um að leikurinn sé búinn.
+
+* Ef maður commentar út socket.emit('updateGames') í main.controller efst þá vissulega kemur ekki upp listinn af leikjum þegar þú ferð inná
+  síðuna í öðrum browser, en vissulega væri þetta einhvað sem myndi brotna í e2e testi.
+
+* Í cellclick ef maður breytir í postinu þegar maður sendir placeMove að senda commandið CreateGame í staðin þá faila ekki test og þú getur
+  ekki spilað leikinn.
