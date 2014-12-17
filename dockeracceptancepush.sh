@@ -54,6 +54,7 @@ echo ------------------------------------------------
 echo  Done removing old dockerimage
 echo
 
+
 echo Starting new dockerimage...
 ssh root@$ACCEPTANCE_URI 'docker run -p 80:8080 -d -e NODE_ENV=production -e MONGOLAB_URI='$MONGOLAB_URI' --name="tictactoe" sveinnel/tictactoe'
 EXITCODE=$?
