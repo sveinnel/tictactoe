@@ -63,8 +63,6 @@ io.on('connection', function (socket) {
 				}
 				
 			};
-			console.log("LISTOFGAMES",listOfGames);
-			//console.log("ERROR",err);
 			for (var i = 0; i < sockets.length; i++) {
 				sockets[i].emit('gamesUpdated', listOfGames);
 			}
