@@ -1,5 +1,5 @@
 'use strict';
-
+var q = require('q');
 module.exports = function(app) {
     var boundedContext = require('../model/tictactoe/tictactoeBoundedContext');
     var tictactoeHandler = require('../model/tictactoe/aggregate/tictactoe');
@@ -11,8 +11,11 @@ module.exports = function(app) {
                 req.body.id = uuid.v1();
                 req.body.timeStamp = new Date();
                 var context = boundedContext(app.eventStore, tictactoeHandler);
-                var newEventHistory = context.handleCommand(req.body);
-                res.json(newEventHistory);
+                context.handleCommand(req.body).then(function (result) {
+                    res.json(result);
+                }, function (err) {
+                    res.json(err);
+                });
             } catch (e) {
                 res.json(e);
             }
@@ -21,8 +24,11 @@ module.exports = function(app) {
             try {
                 req.body.timeStamp = new Date();
                 var context = boundedContext(app.eventStore, tictactoeHandler);
-                var newEventHistory = context.handleCommand(req.body);
-                res.json(newEventHistory);
+                context.handleCommand(req.body).then(function (result) {
+                    res.json(result);
+                }, function (err) {
+                    res.json(err);
+                });
             } catch (e) {
                 res.json(e);
             }
@@ -31,8 +37,11 @@ module.exports = function(app) {
             try {
                 req.body.timeStamp = new Date();
                 var context = boundedContext(app.eventStore, tictactoeHandler);
-                var newEventHistory = context.handleCommand(req.body);
-                res.json(newEventHistory);
+                context.handleCommand(req.body).then(function (result) {
+                    res.json(result);
+                }, function (err) {
+                    res.json(err);
+                });
             } catch (e) {
                 res.json(e);
             }

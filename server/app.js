@@ -15,6 +15,7 @@ app.appName = "TicTacToe" + new Date();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
+console.log("EVENTSTORE",config.eventstore);
 app.eventStore = require('.' + config.eventstore)();//require('./eventstore/memorystore/memorystore')();
 
 require('./config/express')(app);
@@ -46,10 +47,29 @@ io.on('connection', function (socket) {
 		}
 	});
 	socket.on('updateGames', function(){
-		var listOfGames = app.eventStore.getAllGames(); 
-		for (var i = 0; i < sockets.length; i++) {
-			sockets[i].emit('gamesUpdated', listOfGames);
-		}
+		var listOfGames = []; 
+		app.eventStore.getAllGames().then(function(loadedEvents){
+			for (var i = 0; i < loadedEvents.length; i++) {
+				var gameJoined = false;
+				for (var j = 0; j < loadedEvents[i].events.length; j++) {
+					if(loadedEvents[i].events[j].event === "GameJoined"){
+						gameJoined = true;
+					}
+				};
+				if(!gameJoined && loadedEvents[i].events[0].name !== '' 
+					           && loadedEvents[i].events[0].name !== undefined){
+					listOfGames.push({id: loadedEvents[i].events[0].id,
+									  name: loadedEvents[i].events[0].name});
+				}
+				
+			};
+			console.log("LISTOFGAMES",listOfGames);
+			//console.log("ERROR",err);
+			for (var i = 0; i < sockets.length; i++) {
+				sockets[i].emit('gamesUpdated', listOfGames);
+			}
+
+		}); 
 	});
 	socket.on('wonGame', function(msg){
 		for (var i = 0; i < sockets.length; i++) {

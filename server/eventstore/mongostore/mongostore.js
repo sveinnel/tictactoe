@@ -36,6 +36,21 @@ module.exports = function(){
       });
 
       return deferred.promise;
-    }
+    },
+    getAllGames: function(){
+      var deferred = q.defer();
+      var listOfGames = [];
+      Store.find({},{'events.event': 1, 
+                     //'events.event': "GameJoined", 
+                     'events.name':1, 
+                     'events.id':1}, function(err, stream){
+        if(err){
+          deferred.reject(err);
+        }
+        deferred.resolve(stream || []);
+      });
+
+      return deferred.promise;
+    }    
   }
 };

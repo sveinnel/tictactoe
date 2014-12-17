@@ -71,7 +71,8 @@ module.exports = function (grunt) {
       },
       mochaTest: {
         files: ['server/**/*.js'],
-        tasks: ['env:commit', 'mochaTest']
+        tasks: ['env:test','mochaTest:test','env:test', 'mochaTest:dbTest']
+        //tasks: ['env:commit', 'mochaTest']
       },
       jsTest: {
         files: [
@@ -611,7 +612,7 @@ module.exports = function (grunt) {
     if (target === 'server') {
       return grunt.task.run([
         'env:all',
-        'env:commit',
+        'env:test',
         'mochaTest:test'
       ]);
     }

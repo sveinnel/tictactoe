@@ -143,6 +143,7 @@ angular.module('tictactoeApp')
             
 
             socket.on('gamesUpdated', function(games){
+            	console.log("listOfGames",games);
             	$scope.listOfGames = games;
             	$scope.$apply();
             });

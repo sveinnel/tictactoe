@@ -1,40 +1,38 @@
+var q = require('q');
 module.exports = function() {
     var store = {};
     return {
         loadEvents: function(id) {
-            if (id in store) {
-                return store[id]       
-            }
-            else{
-                return [];
-            }
+            var deferred = q.defer();
+            deferred.resolve(store[id] || []);
+            return deferred.promise;
         },
         storeEvents: function(id, events) {
-            if(id in store){
-                store[id] = store[id].concat(events);
-            }
-            else{
-                store[id] = events;
-            }
+            var deferred = q.defer();
+            store[id] = (store[id] || []).concat(events);
+            deferred.resolve(store[id]);
+            return deferred.promise;
         },
-        getAllGames: function(){
+        getAllGames: function() {
+            var deferred = q.defer();
             var listOfGames = [];
             for (var evt in store) {
                 var joined = false;
                 for (var i = 0; i < store[evt].length; i++) {
-                    if(store[evt][i].event === 'GameJoined'){
+                    if (store[evt][i].event === 'GameJoined') {
                         joined = true;
                         break;
                     }
                 }
-                if(!joined){
+                if (!joined) {
                     listOfGames.push({
-                                        id: evt,
-                                        name: store[evt][0].name
-                                    });
+                        id: evt,
+                        name: store[evt][0].name
+                    });
                 }
             }
-            return listOfGames;
+            deferred.resolve(listOfGames);
+            return deferred.promise;
         }
     };
 }
