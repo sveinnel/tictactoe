@@ -13,11 +13,10 @@ describe('Mongodb store', function() {
   it('Should return empty array for unknown id', function() {
 
     var store = mongoStore();
-
+    this.timeout(5000);
     store.loadEvents('12345').then(function(err, loadedEvents){
       should(loadedEvents.length).be.exactly(0);
       should(loadedEvents).be.instanceof(Array);
-      //should(loadedEvents).eql(['A']);
 
     }, function(err){
       assert.fail('Load events failure!', err);
@@ -29,7 +28,7 @@ describe('Mongodb store', function() {
   it('Should return events previously stored', function(done) {
 
     var store = mongoStore();
-
+    this.timeout(5000);
     store.storeEvents('12345', [{"id":"1"}]).then(function(){
       store.loadEvents('12345').then(function(loadedEvents){
 
@@ -47,7 +46,7 @@ describe('Mongodb store', function() {
 
   it('should append stored events to events previously stored',function(done){
     var store = mongoStore();
-
+    this.timeout(5000);
     store.storeEvents('12345', [{"id":"1"}]).then(function(){
       store.storeEvents('12345', [{"id":"2"}]).then(function(){
         store.loadEvents('12345').then(function(loadedEvents){

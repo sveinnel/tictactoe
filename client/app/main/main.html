@@ -1,6 +1,6 @@
-<header class="hero-unit" id="banner" >
+<header class="tictactoeUnit" id="banner" >
   <div class="container">
-    <h1>Tic Tac Toe</h1>
+    <h1 id="appTitle">Tic Tac Toe</h1>
     <p class="lead">Play the wonderful game of Tic Tac Toe</p>
   </div>
 </header>
@@ -12,17 +12,17 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
-            <ul class="listOfGames">
+            <ul class="listOfGames joinGame">
               <li class="animate-repeat" ng-repeat="game in listOfGames">
-                <a href="" ng-click="joinGame(game.id, game.name)"> {{game.name}}</a>
+                <a href="" ng-click="joinGame(game.id, game.name)" class="joinGame-{{game.name}}"> {{game.name}}</a>
               </li>
             </ul>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Your Name" ng-model="userName">
-              <input type="text" class="form-control" placeholder="Your Game Name" ng-model="gameName">
+              <input type="text" class="userName form-control" placeholder="Your Name" ng-model="userName">
+              <input type="text" class="gameName form-control" placeholder="Your Game Name" ng-model="gameName">
             </div>
             <div class="input-group-btn">
-              <button class="btn btn-default" type="button" ng-click="createGame()">Create Game</button>
+              <button class="btn btn-default createGameButton" type="button" ng-click="createGame()">Create Game</button>
             </div>
           </div>
         </div>
@@ -30,25 +30,32 @@
     </div>
 
     <div class="col-lg-4" ng-show="showGame">
-      <h1 class="page-header">{{gameName}}</h1>
+      <h1 class="gameTitle page-header">{{gameName}}</h1>
       <div class="container">
         <div class="row">
-          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([0,0])">{{cell[0][0]}}</div>
-          <div class="col-lg-2 ticCell text-center borderLeft borderRight" ng-click="cellClick([0,1])">{{cell[0][1]}}</div>
-          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([0,2])">{{cell[0][2]}}</div>
+          <div class="col-lg-2 ticCell cell00 text-center" ng-click="cellClick([0,0])">{{cell[0][0]}}</div>
+          <div class="col-lg-2 ticCell cell01 text-center borderLeft borderRight" ng-click="cellClick([0,1])">{{cell[0][1]}}</div>
+          <div class="col-lg-2 ticCell cell02 text-center" ng-click="cellClick([0,2])">{{cell[0][2]}}</div>
         </div>
         <div class="row">
-          <div class="col-lg-2 ticCell text-center borderTop borderBottom" ng-click="cellClick([1,0])">{{cell[1][0]}}</div>
-          <div class="col-lg-2 ticCell text-center borderTop borderBottom borderLeft borderRight" ng-click="cellClick([1,1])">{{cell[1][1]}}</div>
-          <div class="col-lg-2 ticCell text-center borderTop borderBottom" ng-click="cellClick([1,2])">{{cell[1][2]}}</div>
+          <div class="col-lg-2 ticCell cell10 text-center borderTop borderBottom" ng-click="cellClick([1,0])">{{cell[1][0]}}</div>
+          <div class="col-lg-2 ticCell cell11 text-center borderTop borderBottom borderLeft borderRight" ng-click="cellClick([1,1])">{{cell[1][1]}}</div>
+          <div class="col-lg-2 ticCell cell12 text-center borderTop borderBottom" ng-click="cellClick([1,2])">{{cell[1][2]}}</div>
         </div>
         <div class="row">
-          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([2,0])">{{cell[2][0]}}</div>
-          <div class="col-lg-2 ticCell text-center borderLeft borderRight" ng-click="cellClick([2,1])">{{cell[2][1]}}</div>
-          <div class="col-lg-2 ticCell text-center" ng-click="cellClick([2,2])">{{cell[2][2]}}</div>
+          <div class="col-lg-2 ticCell cell20 text-center" ng-click="cellClick([2,0])">{{cell[2][0]}}</div>
+          <div class="col-lg-2 ticCell cell21 text-center borderLeft borderRight" ng-click="cellClick([2,1])">{{cell[2][1]}}</div>
+          <div class="col-lg-2 ticCell cell22 text-center" ng-click="cellClick([2,2])">{{cell[2][2]}}</div>
         </div>
       </div>
     </div>
+        <div class="row" ng-show="showResult">
+          <div class="col-lg-4">
+            <h2 class="msgWindow">{{gameResultMsg}}</h2>
+          </div>
+        </div>
+
+   
 
   </div>
 </div>

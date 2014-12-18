@@ -5,7 +5,9 @@ angular.module('tictactoeApp')
             socket.emit('updateGames');
             $scope.gameName = '';
             $scope.showGame = false;
+            $scope.showResult = false;
             $scope.listOfGames = [];
+            $scope.gameResultMsg = '';
             $scope.side = '';
             $scope.cell = [
 		        ['', '', ''],
@@ -24,6 +26,12 @@ angular.module('tictactoeApp')
 			    $scope.gameId = '';
 		    };
 
+		    var notifyGameOver = function(msg){
+		    	$scope.showGame = false;
+		    	$scope.showResult = true;
+		    	$scope.gameResultMsg = msg;
+		    };
+
             $scope.createGame = function() {
                 $http.post('/api/createGame', {
                     cmd: 'CreateGame',
@@ -38,6 +46,7 @@ angular.module('tictactoeApp')
             			$scope.side = 'X';
                         socket.emit('updateGames');
                         $scope.showGame = true;
+                        $scope.showResult = false;
                         $scope.gameId = data[0].id;
                         $scope.opponentJoined = false;
                     }
@@ -63,15 +72,16 @@ angular.module('tictactoeApp')
 		                    if(data[0].event === 'GameJoined'){
 		                    	$scope.side = 'O';
 		                    	$scope.showGame = true;
+		                    	$scope.showResult = false;
 		                    	$scope.gameName = data[0].name;
 		                    	$scope.gameId = id;
 		            			socket.emit('joinOpponent', {id: id}); 
 		                    }
 		                    if(data[0].event === 'FullGameJoinAttempted'){
-		                    	alert('Game allready full!');
+		                    	notifyGameOver('Game allready full!');
 		                    }
 		                    if(data[0].event === 'NotExistingGameJoinAttempted'){
-		                    	alert('Game does not exist!');
+		                    	notifyGameOver('Game does not exist!');
 		                    	
 		                    }
 		                })
@@ -150,7 +160,7 @@ angular.module('tictactoeApp')
             
             socket.on('gameWon', function(msg){
             	if(msg.id === $scope.gameId){
-            		alert(msg.winner + ' is the Winner!');
+            		notifyGameOver(msg.winner + ' is the Winner!');
             		resetGameBoard();
             		$scope.showGame = false;
             		$scope.$apply();
@@ -159,7 +169,7 @@ angular.module('tictactoeApp')
 
             socket.on('gameDraw', function(msg){
             	if(msg.id === $scope.gameId){
-            		alert('It\'s a draw!');
+            		notifyGameOver('It\'s a draw!');
             		resetGameBoard();
             		$scope.showGame = false;
             		$scope.$apply();

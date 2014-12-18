@@ -6,6 +6,7 @@ var request = require('supertest');
 
 describe('POST /api/createGame', function() {
   it('should respond with event as JSON array', function(done) {
+    this.timeout(5000);
     var command = {
       cmd: "CreateGame",
       user: {
