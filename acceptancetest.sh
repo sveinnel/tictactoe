@@ -15,7 +15,7 @@ echo
 
 echo Starting e2e tests...
 echo ------------------------------------------------
-grunt e2e
+grunt test:e2e
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 echo ------------------------------------------------

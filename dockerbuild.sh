@@ -33,4 +33,9 @@ docker build -t sveinnel/tictactoe .
 EXITCODE=$?
 if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
 
+echo Pushing to docker...
+docker push sveinnel/tictactoe
+EXITCODE=$?
+if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
+
 echo "Done"
