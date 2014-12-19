@@ -15,11 +15,6 @@ echo ------------------------------------------------
 echo  Smoketests OK
 echo 
 
-echo Pushing to docker...
-docker push sveinnel/tictactoe
-EXITCODE=$?
-if [ $EXITCODE -ne 0 ] ; then exit $EXITCODE ; fi
-
 echo Starting smoketests from production server...
 echo ------------------------------------------------
 echo Checking if mongolab is available...
